@@ -2,6 +2,7 @@
 # sunlime-hostings.py - create hosting contract change documents
 
 hostingSalutation = 0
+hostingSalutationStatus = 0
 hostingContinue = 0
 hosting = 0 # string to identify the hosting package; for EDIS it would be
 domain = 0 #
@@ -13,8 +14,8 @@ mr = 'Herr'
 choose = 'Choose how you want to address the client.'
 enterMs = 'Enter 1 for \"Frau\".'
 enterMr = 'Enter 2 for \"Herr\".'
-hostingSalutationMs = 'Sehr geehrte Frau '
-hostingSalutationMr = 'Sehr geehrter Herr '
+hostingSalutationMs = 'Sehr geehrte Frau'
+hostingSalutationMr = 'Sehr geehrter Herr'
 
 #################
 # Choose "Anrede"
@@ -23,19 +24,23 @@ hostingSalutationMr = 'Sehr geehrter Herr '
 def hostingSalutationSet(hostingSalutation):
   print('{} \n {} \n {}'.format(choose,enterMs,enterMr))
   hostingSalutation = eval(input('>>> '))
+
   if hostingSalutation in range(1, 3):
+    print('Enter the surname of the client:')
+    hostingSalutationName = input('>>> ')
+
     if hostingSalutation == 1:
       gender = ms
       print('You have entered **{}** and chosen {} as the salutation for your letter.'.format(hostingSalutation, gender))
-      print('Enter the surname of the client:')
-      hostingSalutationName = input('>>> ')
-      hostingSalutation = hostingSalutationMs + hostingSalutationName
+      hostingSalutation = hostingSalutationMs + hostingSalutationName + '!'
       print('Your salutation is: **{}**'.format(hostingSalutation))
       return hostingSalutation
 
     elif hostingSalutation == 2:
       gender = mr
       print('You have entered **{}** and chosen {} as the salutation for your letter.'.format(hostingSalutation, gender))
+      hostingSalutation = hostingSalutationMr + hostingSalutationName + ' !'
+      print('Your salutation is: **{}**'.format(hostingSalutation))
       return hostingSalutation
 
   else:
@@ -62,5 +67,6 @@ def hostingContinueSet(hostingContinue):
 
 while True:
   hostingSalutationStatus = hostingSalutationSet(hostingSalutation)
+  print('{}'.format(hostingSalutationStatus))
   hostingContinueStatus = hostingContinueSet(hostingContinue)
 
