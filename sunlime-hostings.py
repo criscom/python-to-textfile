@@ -7,6 +7,9 @@ hosting = 0 # string to identify the hosting package; for EDIS it would be
 domain = 0 #
 date_1 = 0 # date for latest notification
 date_2 = 0 # date when server will be deleted
+gender = 0
+ms = 'Frau'
+mr = 'Herr'
 choose = 'Choose how you want to address the client.'
 enterMs = 'Enter 1 for \"Frau\".'
 enterMr = 'Enter 2 for \"Herr\".'
@@ -22,7 +25,8 @@ def hostingSalutationSet(hostingSalutation):
   hostingSalutation = eval(input('>>> '))
   if hostingSalutation in range(1, 3):
     if hostingSalutation == 1:
-      print('You have entered **{}** and chosen \"Frau\" as the salutation for your letter.'.format(hostingSalutation))
+      gender = ms
+      print('You have entered **{}** and chosen {} as the salutation for your letter.'.format(hostingSalutation, gender))
       print('Enter the surname of the client:')
       hostingSalutationName = input('>>> ')
       hostingSalutation = hostingSalutationMs + hostingSalutationName
@@ -30,7 +34,8 @@ def hostingSalutationSet(hostingSalutation):
       return hostingSalutation
 
     elif hostingSalutation == 2:
-      print('You have entered **{}** and chosen \"Herr\" as the salutation for your letter.'.format(hostingSalutation))
+      gender = mr
+      print('You have entered **{}** and chosen {} as the salutation for your letter.'.format(hostingSalutation, gender))
       return hostingSalutation
 
   else:
