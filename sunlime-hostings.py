@@ -67,6 +67,6 @@ def hostingContinueSet(hostingContinue):
 
 while True:
   hostingSalutationStatus = hostingSalutationSet(hostingSalutation)
-  print('{}'.format(hostingSalutationStatus))
+  print('{}'.format(hostingSalutationStatus), file=open('output.txt', 'a'))
   hostingContinueStatus = hostingContinueSet(hostingContinue)
 
