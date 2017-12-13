@@ -1,10 +1,10 @@
 #! python 3
 # sunlime-hostings.py - create hosting contract change documents
 
-hostingSalutation = 0
-hostingSalutationStatus = 0
-hostingContinue = 0
 hosting = 0 # string to identify the hosting package; for EDIS it would be
+hostingContinue = 0
+hostingGender = 0
+hostingName = 0
 domain = 0 #
 date_1 = 0 # date for latest notification
 date_2 = 0 # date when server will be deleted
@@ -18,36 +18,59 @@ hostingSalutationMs = 'Sehr geehrte Frau'
 hostingSalutationMr = 'Sehr geehrter Herr'
 
 #################
-# Choose "Anrede"
+# Choose gender
 #################
 
-def hostingSalutationSet(hostingSalutation):
+def hostingGenderSet():
   print('{} \n {} \n {}'.format(choose,enterMs,enterMr))
-  hostingSalutation = eval(input('>>> '))
+  hostingGender = eval(input('>>> '))
 
-  if hostingSalutation in range(1, 3):
-    print('Enter the surname of the client:')
-    hostingSalutationName = input('>>> ')
-
-    if hostingSalutation == 1:
+  if hostingGender in range(1, 3):
+    if hostingGender == 1:
       gender = ms
-      print('You have entered **{}** and chosen {} as the salutation for your letter.'.format(hostingSalutation, gender))
-      hostingSalutation = hostingSalutationMs + hostingSalutationName + '!'
-      print('Your salutation is: **{}**'.format(hostingSalutation))
-      return hostingSalutation
+      print('You have entered **{}** and chosen {} as the salutation for your letter.'.format(hostingGender, gender))
+      hostingGender = hostingSalutationMs
+      print('Your salutation is: **{}**'.format(hostingGender))
+      return hostingGender
 
-    elif hostingSalutation == 2:
+    elif hostingGender == 2:
       gender = mr
-      print('You have entered **{}** and chosen {} as the salutation for your letter.'.format(hostingSalutation, gender))
-      hostingSalutation = hostingSalutationMr + hostingSalutationName + ' !'
-      print('Your salutation is: **{}**'.format(hostingSalutation))
-      return hostingSalutation
+      print('You have entered **{}** and chosen {} as the salutation for your letter.'.format(hostingGender, gender))
+      hostingGender = hostingSalutationMr
+      print('Your salutation is: **{}**'.format(hostingGender))
+      return hostingGender
 
   else:
     print('You haven\'t entered a correct number!','Let\'s start all over again!')
     print('=================================================================')
-    hostingSalutationSet(hostingSalutation)
+    hostingGenderSet(hostingGender)
 
+###########
+# Choose name
+###########
+def hostingNameSet():
+  print('Enter the surname of the client:')
+  hostingName = input('>>> ')
+  return hostingName
+
+###################
+# Create salutation
+###################
+def hostingSalutationSet():
+  print('hostingGender = {}, hostingName = {}'.format(hostingGenderStatus, hostingNameStatus))
+  # hostingSalutation = str(hostingGenderStatus) + str(hostingNameStatus) + '!'
+  hostingSalutation = '{} {}!'.format(hostingGenderStatus, hostingNameStatus)
+  print('{}'.format(hostingSalutation))
+  return hostingSalutation
+
+###########
+# Choose ID
+###########
+
+def hostingIDSet():
+  print('Enter the client ID from easybill: ')
+  hostingID = input('>>> ')
+  return hostingID
 
 ##################
 # Continue or quit
@@ -66,7 +89,10 @@ def hostingContinueSet(hostingContinue):
 ##################
 
 while True:
-  hostingSalutationStatus = hostingSalutationSet(hostingSalutation)
-  print('{}'.format(hostingSalutationStatus), file=open('output.txt', 'a'))
+  hostingGenderStatus = hostingGenderSet()
+  hostingNameStatus = hostingNameSet()
+  hostingSalutationStatus = hostingSalutationSet()
+  hostingIDStatus = hostingIDSet()
+  print('{}'.format(hostingSalutationStatus), file=open('{}-{}.txt'.format(hostingIDStatus, hostingNameStatus), 'a'))
   hostingContinueStatus = hostingContinueSet(hostingContinue)
 
